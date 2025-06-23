@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 트렌드 뉴스레터 - 5분 만에 AI 최전선 파악하기</title>
+    <meta name="description" content="매일 수천 개 글로벌 소스를 분석하여 AI 최전선의 진짜 트렌드를 5분 요약으로 전달합니다.">
+    
+    <!-- Google Fonts - Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand': '#8B5CF6',
+                        'brand-dark': '#7C3AED',
+                        'accent': '#EC4899',
+                        'dark': '#0F172A',
+                        'gray-dark': '#1E293B'
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s ease-in-out infinite',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'fade-in': 'fadeIn 0.5s ease-out'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom Styles -->
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Font family override */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(180deg, #0F172A 0%, #1E293B 100%);
+        }
+        
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+        
+        /* Hero text optimization for mobile */
+        @media (max-width: 640px) {
+            h1 span {
+                font-size: 2.25rem;
+                line-height: 2.75rem;
+            }
+            .hero-subtitle {
+                font-size: 1.125rem;
+                line-height: 1.75rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 span {
+                font-size: 2rem;
+                line-height: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 scroll-smooth">
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white min-h-screen flex items-center relative overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-10 w-64 h-64 bg-purple-500 rounded-full filter blur-3xl animate-float"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-pink-500 rounded-full filter blur-3xl animate-float" style="animation-delay: 3s;"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-5xl md:text-7xl font-bold mb-8 animate-slide-up ko-text">
+                    <span class="block mb-3">매일 수천 개 소스 분석</span>
+                    <span class="block mb-3 gradient-text">AI 최전선의 진짜 트렌드</span>
+                    <span class="block">5분 요약으로 전달</span>
+                </h1>
+                
+                <p class="hero-subtitle text-xl md:text-2xl mb-12 text-gray-300 max-w-3xl mx-auto animate-fade-in ko-paragraph" style="animation-delay: 0.2s;">
+                    <span class="inline-block">유튜브는 너무 길고,</span> <span class="inline-block">Reddit은 영어라 어렵고...</span><br>
+                    <span class="inline-block">이제 5분 핵심 요약 뉴스레터로</span> <span class="inline-block">대세 기술과 새로운 기회를 발견하세요</span>
+                </p>
+                
+                <div class="animate-fade-in" style="animation-delay: 0.4s;">
+                    <form id="hero-signup" class="max-w-md mx-auto">
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <input type="email" placeholder="your@email.com" required
+                                class="flex-1 px-6 py-4 rounded-lg text-gray-900 text-center sm:text-left focus:outline-none focus:ring-4 focus:ring-purple-500">
+                            <button type="submit" class="gradient-bg text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transform hover:scale-105 transition-all duration-200">
+                                구독하기
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 ko-text">
+                <span class="inline-block">AI 트렌드 파악,</span> <span class="inline-block">이래서 힘듭니다</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Problem Cards -->
+                <div class="bg-gray-50 p-8 rounded-2xl hover:shadow-lg transition-shadow">
+                    <div class="text-5xl mb-4">⏱️</div>
+                    <h3 class="text-2xl font-bold mb-3 text-red-600">시간 낭비</h3>
+                    <p class="text-lg text-gray-700 ko-text">30분 영상에 핵심은 2분</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-2xl hover:shadow-lg transition-shadow">
+                    <div class="text-5xl mb-4">🔄</div>
+                    <h3 class="text-2xl font-bold mb-3 text-orange-600">알고리즘 함정</h3>
+                    <p class="text-lg text-gray-700 ko-text">항상 비슷한 콘텐츠만 추천</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-2xl hover:shadow-lg transition-shadow">
+                    <div class="text-5xl mb-4">😱</div>
+                    <h3 class="text-2xl font-bold mb-3 text-yellow-600">뒤늦은 정보</h3>
+                    <p class="text-lg text-gray-700 ko-text">Claude가 GPT를 넘어섰다고?<br>난 언제...</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-2xl hover:shadow-lg transition-shadow">
+                    <div class="text-5xl mb-4">🌐</div>
+                    <h3 class="text-2xl font-bold mb-3 text-green-600">언어 장벽</h3>
+                    <p class="text-lg text-gray-700 ko-text">Reddit 영어 읽기 너무 어려워</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-2xl hover:shadow-lg transition-shadow">
+                    <div class="text-5xl mb-4">📉</div>
+                    <h3 class="text-2xl font-bold mb-3 text-blue-600">정보 격차</h3>
+                    <p class="text-lg text-gray-700 ko-text">국내 AI 커뮤니티 정보는 늦어</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16 max-w-3xl mx-auto">
+                <p class="text-xl md:text-2xl text-gray-700 leading-relaxed ko-paragraph">
+                    <span class="inline-block">유튜브 알고리즘에 갇혀 있는 동안,</span><br>
+                    <span class="inline-block">진짜 AI 혁신은 Reddit과</span> <span class="inline-block">해외 커뮤니티에서 일어나고 있습니다</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="py-24 section-pattern relative overflow-hidden">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-6 text-gray-900 ko-text">
+                <span class="block mb-2">AI가 24시간 글로벌 트렌드를 추적</span>
+                <span class="block">한국어로 핵심만 정리합니다</span>
+            </h2>
+            <p class="text-2xl text-center mb-16 text-gray-600">당신이 잠든 사이에도 일합니다</p>
+            
+            <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <div class="glass-card p-10 hover:transform hover:scale-105 transition-all duration-300">
+                    <h3 class="text-3xl font-bold mb-8 text-purple-600">글로벌 소스 실시간 모니터링</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="text-purple-500 mr-3 text-xl">•</span>
+                            <span class="text-lg ko-text">Reddit 15개 핵심 AI 커뮤니티</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-purple-500 mr-3">•</span>
+                            <span>해외 테크 블로그와 논문 사이트</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-purple-500 mr-3">•</span>
+                            <span>실제 개발자들의 생생한 피드백</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-purple-500 mr-3">•</span>
+                            <span>한국에서 놓치기 쉬운 해외 신기술</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="glass-card p-10 hover:transform hover:scale-105 transition-all duration-300">
+                    <h3 class="text-3xl font-bold mb-8 text-pink-600">5분 안에 모든 것을 파악</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="text-pink-500 mr-3 text-xl">•</span>
+                            <span class="text-lg ko-text">30분 유튜브 → 3줄 핵심 요약</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-pink-500 mr-3">•</span>
+                            <span>영어 장벽 제거, 완벽한 한국어</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-pink-500 mr-3">•</span>
+                            <span>대세가 바뀌기 전에 미리 알림</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-pink-500 mr-3">•</span>
+                            <span>새로운 기회를 남들보다 빨리 포착</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-xl md:text-2xl text-gray-700 font-semibold ko-paragraph">
+                    <span class="inline-block">더 이상 유튜브 재생목록에 갇히지 마세요.</span><br>
+                    <span class="inline-block">진짜 AI 최전선의 소식을 받아보세요.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Credibility Section -->
+    <section class="py-24 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white relative overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-0 left-0 w-96 h-96 bg-purple-600 rounded-full filter blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-pink-600 rounded-full filter blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+        </div>
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 ko-text">
+                매주 이만큼 분석해서 보내드립니다
+            </h2>
+            
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto mb-16">
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-2">10,000+</div>
+                    <p class="text-gray-400 text-sm md:text-base">스캔하는<br>글로벌 게시물</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-2">15개</div>
+                    <p class="text-gray-400 text-sm md:text-base">분석하는<br>해외 커뮤니티</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-2">95%</div>
+                    <p class="text-gray-400 text-sm md:text-base">유튜브 대비<br>시간 절약</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-2">당일</div>
+                    <p class="text-gray-400 text-sm md:text-base">새로운 AI 툴<br>발견 속도</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOMO Section -->
+    <section class="py-24 bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-8 text-red-600 ko-text">
+                    본 서비스는 한정 공개 무료 서비스입니다
+                </h2>
+                
+                <div class="modern-card shadow-2xl text-left">
+                    <p class="text-2xl md:text-3xl font-bold mb-8 ko-text">솔직히 말씀드립니다.<br>우리는 마케팅에 돈을 쓰지 않습니다.</p>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold mb-4">광고 없음:</h3>
+                        <ul class="space-y-3 text-lg text-gray-700">
+                            <li class="ko-text">• 유튜브 광고 X</li>
+                            <li class="ko-text">• 페이스북 광고 X</li>
+                            <li class="ko-text">• 오직 입소문으로만 성장</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="space-y-5 text-lg text-gray-700">
+                        <p class="font-semibold text-xl text-red-600 ko-text">이 페이지를 다시 찾기는 어려울 겁니다.</p>
+                        <p class="ko-paragraph"><span class="inline-block">고성능 AI 시스템 운영 비용 때문에</span> <span class="inline-block">무료 서비스는 일부 인원에게만 제공됩니다.</span></p>
+                        <p class="ko-paragraph"><span class="inline-block">일정 인원이 차면 대기자 명단으로 전환됩니다.</span> <span class="inline-block">지금이 아니면 언제 받아볼 수 있을지 모릅니다.</span></p>
+                        <p class="text-xl font-bold text-gray-900 ko-text"><span class="inline-block">무료 구독, 언제든 취소 가능</span><br><span class="inline-block">밑져야 본전입니다.</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-24 section-pattern">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 ko-text">
+                가입 축하 보너스
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="modern-card hover:shadow-2xl transition-all duration-300 group">
+                    <div class="text-5xl mb-6 transform group-hover:scale-110 transition-transform duration-300">📚</div>
+                    <h3 class="text-3xl font-bold mb-6 text-green-600">2025 AI 활용 가이드</h3>
+                    <ul class="space-y-4 text-lg text-gray-700">
+                        <li class="ko-text">• 유튜브에서는 찾을 수 없는 실전 노하우</li>
+                        <li class="ko-text">• PDF 자료 및 실습 파일 포함</li>
+                        <li class="ko-text">• Reddit에서 화제가 된 AI 활용법 총정리</li>
+                    </ul>
+                </div>
+                
+                <div class="modern-card hover:shadow-2xl transition-all duration-300 group">
+                    <div class="text-5xl mb-6 transform group-hover:scale-110 transition-transform duration-300">💻</div>
+                    <h3 class="text-3xl font-bold mb-6 text-blue-600">IT 활용을 위한 프로그래밍 첫걸음</h3>
+                    <ul class="space-y-4 text-xl text-gray-700">
+                        <li class="ko-text">• AI 시대 필수 코딩 기초</li>
+                        <li class="ko-text">• ChatGPT와 함께하는 프로그래밍 학습법</li>
+                        <li class="ko-text">• 영어 문서 없이도 따라할 수 있는 한국어 강의</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <p class="text-center mt-12 text-xl md:text-2xl text-gray-700 ko-paragraph">
+                <span class="inline-block">이메일 입력 후 즉시</span><br>
+                <span class="inline-block">받은편지함에서 확인하실 수 있습니다</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-6 text-gray-900 ko-text">
+                AI 트렌드 뉴스레터만의 특별한 기능
+            </h2>
+            <p class="text-2xl text-center mb-16 text-gray-600 ko-paragraph">
+                <span class="inline-block">단순한 뉴스 모음이 아닌,</span> <span class="inline-block">실무에 바로 적용 가능한 인사이트</span>
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6">
+                        <span class="text-white text-2xl">🤖</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900">AI 도구 실전 리뷰</h3>
+                    <p class="text-lg text-gray-600 mb-4 ko-text">매주 새로운 AI 도구를 직접 테스트하고 장단점을 솔직하게 공유</p>
+                    <ul class="text-base text-gray-500 space-y-2">
+                        <li class="ko-text">• 실제 사용 예시 포함</li>
+                        <li class="ko-text">• 무료/유료 대안 제시</li>
+                        <li class="ko-text">• ROI 분석 제공</li>
+                    </ul>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="modern-card hover:shadow-2xl transition-all duration-300 group">
+                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-3xl flex items-center justify-center mb-8 shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                        <span class="text-white text-3xl">📊</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-5 text-gray-900">트렌드 예측 분석</h3>
+                    <p class="text-xl text-gray-600 mb-6 ko-text">글로벌 데이터를 기반으로 다음 달 주목해야 할 기술 예측</p>
+                    <ul class="text-lg text-gray-500 space-y-3">
+                        <li class="ko-text">• Reddit 트렌딩 분석</li>
+                        <li class="ko-text">• GitHub 스타 급상승 프로젝트</li>
+                        <li class="ko-text">• VC 투자 동향 반영</li>
+                    </ul>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="modern-card hover:shadow-2xl transition-all duration-300 group">
+                    <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-3xl flex items-center justify-center mb-8 shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                        <span class="text-white text-3xl">💡</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-5 text-gray-900">실무 적용 가이드</h3>
+                    <p class="text-xl text-gray-600 mb-6 ko-text">이론이 아닌 당장 써먹을 수 있는 실용적인 활용법</p>
+                    <ul class="text-lg text-gray-500 space-y-3">
+                        <li class="ko-text">• 업무 자동화 템플릿</li>
+                        <li class="ko-text">• 프롬프트 엔지니어링 팁</li>
+                        <li class="ko-text">• 성공 사례 공유</li>
+                    </ul>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="modern-card hover:shadow-2xl transition-all duration-300 group">
+                    <div class="w-20 h-20 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-3xl flex items-center justify-center mb-8 shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                        <span class="text-white text-3xl">🌍</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-5 text-gray-900">글로벌 독점 소식</h3>
+                    <p class="text-xl text-gray-600 mb-6 ko-text">한국에서는 아직 알려지지 않은 해외 AI 뉴스</p>
+                    <ul class="text-lg text-gray-500 space-y-3">
+                        <li class="ko-text">• 실리콘밸리 내부 소식</li>
+                        <li class="ko-text">• 유럽/중국 AI 동향</li>
+                        <li class="ko-text">• 오픈소스 커뮤니티 소식</li>
+                    </ul>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="modern-card hover:shadow-2xl transition-all duration-300 group">
+                    <div class="w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-3xl flex items-center justify-center mb-8 shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                        <span class="text-white text-3xl">🎯</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-5 text-gray-900">커리어 성장 팁</h3>
+                    <p class="text-xl text-gray-600 mb-6 ko-text">AI 시대에 살아남고 성장하는 실전 전략</p>
+                    <ul class="text-lg text-gray-500 space-y-3">
+                        <li class="ko-text">• AI 활용 스킬 로드맵</li>
+                        <li class="ko-text">• 고연봉 직무 분석</li>
+                        <li class="ko-text">• 포트폴리오 구축법</li>
+                    </ul>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="modern-card hover:shadow-2xl transition-all duration-300 group">
+                    <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-pink-500 rounded-3xl flex items-center justify-center mb-8 shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                        <span class="text-white text-3xl">⚡</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-5 text-gray-900">주간 핫 이슈</h3>
+                    <p class="text-xl text-gray-600 mb-6 ko-text">이번 주 가장 뜨거웠던 AI 논란과 이슈 정리</p>
+                    <ul class="text-lg text-gray-500 space-y-3">
+                        <li class="ko-text">• 업계 주요 논쟁점</li>
+                        <li class="ko-text">• 정책/규제 변화</li>
+                        <li class="ko-text">• 커뮤니티 반응 분석</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="text-center mt-16">
+                <p class="text-xl md:text-2xl text-gray-700 font-semibold mb-8 ko-paragraph">
+                    <span class="inline-block">매주 월요일 아침, 당신의 메일함에서</span><br>
+                    <span class="inline-block">AI 업계 최전선의 생생한 인사이트를 만나보세요</span>
+                </p>
+                <div class="inline-flex flex-wrap justify-center items-center gap-6 md:gap-8 text-lg text-gray-600">
+                    <div class="flex items-center gap-2">
+                        <span class="text-green-500 text-xl">✓</span>
+                        <span class="ko-text">5분 완독</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-green-500 text-xl">✓</span>
+                        <span class="ko-text">실무 중심</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-green-500 text-xl">✓</span>
+                        <span class="ko-text">글로벌 소식</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sign-up Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12 text-gray-900">
+                    유튜브 광고 스킵하는 <br>5초면 충분합니다
+                </h2>
+                
+                <div class="text-gray-600 space-y-2">
+                    <p>유튜브 알고리즘 추천 없음</p>
+                    <p>Reddit 영어 장벽 제거</p>
+                    <p>오직 AI 최전선의 핵심 인사이트만</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-900">
+                궁금한 점이 있으신가요?
+            </h2>
+            
+            <div class="max-w-3xl mx-auto space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="font-bold text-lg mb-2">Q: 정말 무료인가요?</h3>
+                    <p class="text-gray-700">A: 네, 100% 무료입니다.<br>유료 전환 압박도 없습니다.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="font-bold text-lg mb-2">Q: 유튜브 영상보다 정말 나은가요?</h3>
+                    <p class="text-gray-700">A: 30분 영상의 핵심을 3분 안에 읽을 수 있습니다.<br>시간 대비 정보 밀도가 10배 이상 높습니다.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="font-bold text-lg mb-2">Q: 영어를 못해도 이해할 수 있나요?</h3>
+                    <p class="text-gray-700">A: 모든 해외 트렌드를 완벽한 한국어로 번역해 드립니다.<br>Reddit을 직접 읽을 필요가 없습니다.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="font-bold text-lg mb-2">Q: 왜 Reddit 위주인가요?</h3>
+                    <p class="text-gray-700">A: 실제 개발자와 얼리어답터가 가장 활발히 활동하는 곳이<br>Reddit입니다. 유튜브보다 3-7일 빠른 정보를 얻을 수 있습니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-20 bg-gradient-to-br from-purple-900 to-pink-900 text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8">
+                    유튜브 알고리즘에서 <br> 벗어날 마지막 기회
+                </h2>
+                
+                <div class="mb-12 space-y-6 text-lg">
+                    <p>이 페이지를 닫으면,<br>다시 유튜브 추천 영상의 늪으로 돌아갑니다.</p>
+                    <p class="font-semibold">계속 같은 채널, 같은 주제만 보시겠습니까?<br>아니면 진짜 AI 최전선의 트렌드를 받아보시겠습니까?</p>
+                </div>
+                
+                <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 mb-12">
+                    <h3 class="text-2xl font-bold mb-6">약속</h3>
+                    <ul class="space-y-3 text-left max-w-md mx-auto">
+                        <li>• 무료 구독</li>
+                        <li>• 언제든 취소 가능</li>
+                        <li>• 유튜브 30분 → 뉴스레터 3분</li>
+                        <li>• Reddit 영어 → 완벽한 한국어</li>
+                    </ul>
+                </div>
+                
+                <p class="text-xl mb-8">지금 이메일만 입력하세요.<br>대세 기술이 바뀌기 전에 미리 아는 사람이 되세요.</p>
+                <div class="animate-fade-in" style="animation-delay: 0.4s;">
+                    <form id="hero-signup" class="max-w-md mx-auto">
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <input type="email" placeholder="your@email.com" required="" class="flex-1 px-6 py-4 rounded-lg text-gray-900 text-center sm:text-left focus:outline-none focus:ring-4 focus:ring-purple-500">
+                            <button type="submit" class="gradient-bg text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transform hover:scale-105 transition-all duration-200">
+                                구독하기
+                            </button>
+                        </div>
+                    </form>
+                </div>                
+
+                
+                <p class="mt-16 text-sm opacity-80">
+                    P.S. 다음 주 월요일, 당신의 동료들은 유튜브를 보고 있을 때<br>
+                    당신은 이미 다음 AI 트렌드를 알고 있을 겁니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-gray-300 py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <!-- 왼쪽: 컨택 및 사이트 운영 정보 -->
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-6">컨택 및 사이트 운영 정보</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-center">
+                            <span class="text-blue-400 mr-2">✉</span>
+                            <a href="mailto:dream@fun-coding.org" class="hover:text-white transition-colors">dream@fun-coding.org</a>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-blue-400 mr-2">▶</span>
+                            <span>유튜브: </span>
+                            <a href="https://www.youtube.com/@fun-coding" class="hover:text-white transition-colors ml-1">https://www.youtube.com/@fun-coding</a>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-blue-400 mr-2">🏢</span>
+                            <span>이용 약관</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-blue-400 mr-2">🔒</span>
+                            <a href="#" class="hover:text-white transition-colors">개인정보 처리방침</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 오른쪽: 잔재미코딩 (노이런스랩) -->
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-6">잔재미코딩 (노이먼스랩)</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-center">
+                            <span class="text-blue-400 mr-2">🏢</span>
+                            <span>주식회사 튜링스</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-blue-400 mr-2">📋</span>
+                            <span>사업자번호: 555-88-02447</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-blue-400 mr-2">👤</span>
+                            <span>대표: Dave Lee</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-sm">
+                <p>Copyright 2025 © (주) 튤립스 All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>
